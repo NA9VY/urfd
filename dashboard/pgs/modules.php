@@ -63,7 +63,9 @@ the reflector.</p>
 <p>Depending on the configuration of the reflector, one or more modules can also be transcoded to support multiple modes (D-Star, YSF, DMR, etc.) of
 operation at the same time. Modules that are not transcoded can only support one mode at a time.</p>
 <br>
-<p>How a user moves between modules depends on the mode they are using. YSF users transmit with the module's assigned DGID to
-access the module they would like to use. DMR users make a private
+<p>How a user moves between modules depends on the mode they are using.
+<br>YSF users transmit with the module's assigned DGID to
+access the module they would like to use. DGID 00 is the "don't change anything" DGID and the reflector will stay on the module it is on.
+<br>DMR users make a private
 call to the module's assigned talkgroup and then move back to group call talk group to start a conversation.
-D-Star users use the module's assigned URCALL to move to different modules.<p>
+<br>D-Star users use the module's assigned URCALL to move to different modules.<p>
