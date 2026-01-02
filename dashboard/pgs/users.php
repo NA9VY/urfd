@@ -1,4 +1,8 @@
 <?php
+date_default_timezone_set('America/New_York');
+?>
+
+<?php
 
 if (!isset($_SESSION['FilterCallSign'])) {
     $_SESSION['FilterCallSign'] = null;
