@@ -1,4 +1,8 @@
 <?php
+date_default_timezone_set('America/New_York');
+?>
+
+<?php
 
 $Result = @fopen($CallingHome['ServerURL']."?do=GetReflectorList", "r");
 
