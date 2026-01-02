@@ -179,7 +179,7 @@ if ($CallingHome['Active']) {
                 <li<?php echo ($_GET['show'] == "peers") ? ' class="active"' : ''; ?>><a href="./index.php?show=peers">Peers
                         (<?php echo $Reflector->PeerCount(); ?>)</a></li>
                 <li<?php echo ($_GET['show'] == "reflectors") ? ' class="active"' : ''; ?>><a
-                            href="https://dvref.com/" target=blan>Digital Voice Reflector</a></li>
+                            href="https://dvref.com/" target=blan>Digital Voice Reflectors</a></li>
                 <li<?php echo ($_GET['show'] == "livequadnet") ? ' class="active"' : ''; ?>><a
                             href="./index.php?show=livequadnet">QuadNet Live</a></li>
             </ul>
@@ -205,6 +205,7 @@ if ($CallingHome['Active']) {
                     break;
                 case 'modules'  :
                     require_once("./pgs/modules.php");
+                    break;
                 case 'livequadnet' :
                     require_once("./pgs/livequadnet.php");
                     break;
