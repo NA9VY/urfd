@@ -1,3 +1,7 @@
+<?php
+date_default_timezone_set('America/New_York');
+?>
+
 <table class="table table-striped table-hover">
 	<tr class="table-center">
 		<th class="col-md-1">#</th>
