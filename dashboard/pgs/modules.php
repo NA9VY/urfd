@@ -53,11 +53,12 @@ for ($i = 1; $i <= $NumberOfModules; $i++) {
 <p><b>What are Modules?</b></p>
 <br>
 <p>Modules could also be called chat rooms. They are different areas within a reflector to have conversations that are separate from other modules.
-You might also say the main module on a reflector, often Module A, is the calling module and once you've
+While not required on most reflectors, you might also say the main module on a reflector, often Module A, is the calling module and once you've
 established contact with the person you are calling you can both move to a different module to continue the conversation.</p>
 <br>
-<p>Reflector operators have to option of assigning names or topic to the modules they have on their reflector. For example, some operators may dedicated
-modules to AMSAT or POTA conversations while others call the modules Chat Room B and Chat Room C.</p>
+<p>Reflector operators have to option of assigning names or topic to the modules they have on their reflector. For example, some operators may dedicate
+modules to AMSAT or POTA conversations while others call the modules Chat Room B and Chat Room C. How this is do is up to the person that operates 
+the reflector.</p>
 <br>
 <p>Depending on the configuration of the reflector, one or more modules can also be transcoded to support multiple modes (D-Star, YSF, DMR, etc.) of
 operation at the same time. Modules that are not transcoded can only support one mode at a time.</p>
