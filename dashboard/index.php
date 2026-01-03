@@ -174,14 +174,22 @@ if ($CallingHome['Active']) {
                 <li<?php echo ($_GET['show'] == "repeaters") ? ' class="active"' : ''; ?>><a
                             href="./index.php?show=repeaters">Links (<?php echo $Reflector->NodeCount(); ?>)
                         </a></li>
-                <li<?php echo ($_GET['show'] == "modules") ? ' class="active"' : ''; ?>><a
-                            href="./index.php?show=modules">Modules List</a></li>
                 <li<?php echo ($_GET['show'] == "peers") ? ' class="active"' : ''; ?>><a href="./index.php?show=peers">Peers
                         (<?php echo $Reflector->PeerCount(); ?>)</a></li>
+                <li<?php echo ($_GET['show'] == "modules") ? ' class="active"' : ''; ?>><a
+                            href="./index.php?show=modules">Modules List</a></li>
+                <p>     -----------------------<br>
+                         BrandMeister Links for SIN</p>
+                <li<?php echo ($_GET['show'] == "lastheardsin") ? ' class="active"' : ''; ?>><a
+                            href="https://brandmeister.network/?page=lh&DestinationID=31188" target=blan>Last Heard on BM SIN</a></li>
+                <li<?php echo ($_GET['show'] == "devicessin") ? ' class="active"' : ''; ?>><a
+                            href="https://brandmeister.network/?page=talkgroup&id=31188" target=blan>Devices connected to BM SIN</a></li>
+                <p>     -----------------------<br>
+                         Links to other stuff</p>
                 <li<?php echo ($_GET['show'] == "reflectors") ? ' class="active"' : ''; ?>><a
                             href="https://dvref.com/" target=blan>Digital Voice Reflectors</a></li>
                 <li<?php echo ($_GET['show'] == "livequadnet") ? ' class="active"' : ''; ?>><a
-                            href="./index.php?show=livequadnet">QuadNet Live</a></li>
+                            href="./index.php?show=livequadnet">D-Star Activity Live</a></li>
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
