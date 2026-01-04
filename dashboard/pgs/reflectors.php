@@ -1,3 +1,5 @@
+<!-- This file is no longer linked to in index.php but is left here as reference.
+The link to this file has been replaced with a link to the DVRev site. -->
 <?php
 
 $Result = @fopen($CallingHome['ServerURL']."?do=GetReflectorList", "r");
