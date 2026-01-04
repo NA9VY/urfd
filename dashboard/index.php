@@ -174,7 +174,7 @@ if ($CallingHome['Active']) {
                 <li<?php echo ($_GET['show'] == "repeaters") ? ' class="active"' : ''; ?>><a
                             href="./index.php?show=repeaters">Links (<?php echo $Reflector->NodeCount(); ?>)
                         </a></li>
-                <li<?php echo ($_GET['show'] == "peers") ? ' class="active"' : ''; ?>><a href="./index.php?show=peers">Peers
+                <li<?php echo ($_GET['show'] == "peers") ? ' class="active"' : ''; ?>><a href="./index.php?show=peers">Interlinks
                         (<?php echo $Reflector->PeerCount(); ?>)</a></li>
                 <li<?php echo ($_GET['show'] == "modules") ? ' class="active"' : ''; ?>><a
                             href="./index.php?show=modules">Modules List</a></li>
