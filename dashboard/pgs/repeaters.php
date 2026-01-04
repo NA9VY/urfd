@@ -98,3 +98,8 @@ for ($i=0;$i<$Reflector->NodeCount();$i++) {
 ?>
 
 </table>
+
+<p><b>What is a Link?</b><br>
+A Link is a hotspot or repeater that is connected to the reflector. These are the devices users<br>
+connect through to make contact with the reflector.
+</p>
