@@ -179,7 +179,7 @@ if ($CallingHome['Active']) {
                 <li<?php echo ($_GET['show'] == "modules") ? ' class="active"' : ''; ?>><a
                             href="./index.php?show=modules">Modules List</a></li>
                 <p>&nbsp&nbsp&nbsp&nbsp&nbsp-----------------------<br>
-                &nbsp&nbsp&nbsp&nbsp&nbspBrandMeister Links<br>for SIN</p>
+                &nbsp&nbsp&nbsp&nbsp&nbspBrandMeister Links<br>&nbsp&nbsp&nbsp&nbsp&nbspfor SIN</p>
                 <li<?php echo ($_GET['show'] == "lastheardsin") ? ' class="active"' : ''; ?>><a
                             href="https://brandmeister.network/?page=lh&DestinationID=31188" target=blan>Last Heard<br>on BM SIN</a></li>
                 <li<?php echo ($_GET['show'] == "devicessin") ? ' class="active"' : ''; ?>><a
