@@ -159,7 +159,7 @@ for ($i=0;$i<$Reflector->StationCount();$i++) {
       </table>
    </div>
    <div class="col-md-3">
-      <table class="table table-striped table-hover">
+      <table class="table table-bordered table-striped table-hover">
          <?php 
 
 $Modules = $Reflector->GetModules();
@@ -188,7 +188,7 @@ $GlobalPositions = array();
 for ($i=0;$i<count($Modules);$i++) {
     
    $Users = $Reflector->GetNodesInModulesByID($Modules[$i]);
-   echo '<td><table class="table table-hover">';
+   echo '<td><table class="table table-bordered table-hover">';
 
    $UserCheckedArray = array();
    
