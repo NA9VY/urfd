@@ -25,7 +25,7 @@ fclose($Result);
 <table class="table table-striped table-hover">
 	<tr class="table-center">
 		<th class="col-md-1">#</th>
-		<th class="col-md-2">XLX Peer</th>
+		<th class="col-md-2">Interlink Peer</th>
 		<th class="col-md-2">Last Heard</th>
 		<th class="col-md-2">Linked for</th>
 		<th class="col-md-2">Protocol</th>
@@ -103,3 +103,8 @@ for ($i=0;$i<$Reflector->PeerCount();$i++) {
 ?>
 
 </table>
+<p><b>What is an Interlink?</b></p>
+<br>
+<p>An interlink is a connection between two separate systems. Interlinking two systems allows users of both systems to communicate with each other. I common interlink for URFD is with
+BrandMeister talkgroup. This allows the users of the BrandMeister talkgroup to talk with users on the URFD reflector. Interlinks will often be connected to a specific module within
+the URFD reflector.</p>
