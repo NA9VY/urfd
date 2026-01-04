@@ -51,7 +51,6 @@ for ($i = 1; $i <= $NumberOfModules; $i++) {
 </table>
 
 <p><b>What are Modules?</b></p>
-<br>
 <p>Modules could also be called chat rooms. They are different areas within a reflector to have conversations that are separate from other modules.
 While not required on most reflectors, you might also say the main module on a reflector, often Module A, is the calling module and once you've
 established contact with the person you are calling you can both move to a different module to continue the conversation.</p>
