@@ -53,7 +53,7 @@ if (isset($_GET['do'])) {
 
 <div class="row">
    <div class="col-md-9">
-      <table class="table table-striped table-hover">
+      <table class="table table-bordered table-striped table-hover">
 <?php
 if ($PageOptions['UserPage']['ShowFilter']) {
   echo '
