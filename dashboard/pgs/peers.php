@@ -106,7 +106,10 @@ for ($i=0;$i<$Reflector->PeerCount();$i++) {
 <p><b>What is an Interlink?</b></p>
 <br>
 <p>An interlink is a connection between two separate systems. Interlinking two systems allows users of<br>
-        both systems to communicate with each other. A common interlink for URFD is with a BrandMeister talkgroup.<br>
-        This allows the users of the BrandMeister talkgroup to talk with users on the URFD reflector. Interlinks<br>
-        will be connected to one or more specific module within the URFD reflector and useres of the URFD reflector<br>
-        go to that or those module to use the interlink.</p>
+both systems to communicate with each other.<br>
+<br>
+A common interlink for URFD is with a BrandMeister talkgroup. This allows the users of the BrandMeister<>br>
+talkgroup and the users on the URFD reflector to talk with each other.<br>
+<br>	
+Interlinks will be connected to one or more specific modules within the URFD reflector and useres of the URFD reflector<br>
+go to that or those module to use the interlink.</p>
