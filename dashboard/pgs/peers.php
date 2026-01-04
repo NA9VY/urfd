@@ -104,7 +104,6 @@ for ($i=0;$i<$Reflector->PeerCount();$i++) {
 
 </table>
 <p><b>What is an Interlink?</b></p>
-<br>
 <p>An interlink is a connection between two separate systems. Interlinking two systems allows users of<br>
 both systems to communicate with each other.<br>
 <br>
