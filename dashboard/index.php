@@ -172,20 +172,20 @@ if ($CallingHome['Active']) {
                 <li<?php echo (($_GET['show'] == "users") || ($_GET['show'] == "")) ? ' class="active"' : ''; ?>><a
                             href="./index.php">Last Heard</a></li>
                 <li<?php echo ($_GET['show'] == "repeaters") ? ' class="active"' : ''; ?>><a
-                            href="./index.php?show=repeaters">Links (<?php echo $Reflector->NodeCount(); ?>)
+                            href="./index.php?show=repeaters">Connected Devices (<?php echo $Reflector->NodeCount(); ?>)
                         </a></li>
                 <li<?php echo ($_GET['show'] == "peers") ? ' class="active"' : ''; ?>><a href="./index.php?show=peers">Interlinks
                         (<?php echo $Reflector->PeerCount(); ?>)</a></li>
                 <li<?php echo ($_GET['show'] == "modules") ? ' class="active"' : ''; ?>><a
                             href="./index.php?show=modules">Modules List</a></li>
-                <p>     -----------------------<br>
-                         BrandMeister Links for SIN</p>
+                <p>&nbsp&nbsp&nbsp&nbsp&nbsp-----------------------<br>
+                &nbsp&nbsp&nbsp&nbsp&nbspBrandMeister Links<br>for SIN</p>
                 <li<?php echo ($_GET['show'] == "lastheardsin") ? ' class="active"' : ''; ?>><a
-                            href="https://brandmeister.network/?page=lh&DestinationID=31188" target=blan>Last Heard on BM SIN</a></li>
+                            href="https://brandmeister.network/?page=lh&DestinationID=31188" target=blan>Last Heard<br>on BM SIN</a></li>
                 <li<?php echo ($_GET['show'] == "devicessin") ? ' class="active"' : ''; ?>><a
-                            href="https://brandmeister.network/?page=talkgroup&id=31188" target=blan>Devices connected to BM SIN</a></li>
-                <p>     -----------------------<br>
-                         Links to other stuff</p>
+                            href="https://brandmeister.network/?page=talkgroup&id=31188" target=blan>Devices connected<br>to BM SIN</a></li>
+                <p>&nbsp&nbsp&nbsp&nbsp&nbsp-----------------------<br>
+                &nbsp&nbsp&nbsp&nbsp&nbspLinks to other stuff</p>
                 <li<?php echo ($_GET['show'] == "reflectors") ? ' class="active"' : ''; ?>><a
                             href="https://dvref.com/" target=blan>Digital Voice Reflectors</a></li>
                 <li<?php echo ($_GET['show'] == "livequadnet") ? ' class="active"' : ''; ?>><a
