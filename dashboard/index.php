@@ -1,9 +1,9 @@
+<!DOCTYPE html>
 <?php
-
 /*
- *  This dashboard is being developed by the DVBrazil Team as a courtesy to
- *  the XLX Multiprotocol Gateway Reflector Server project.
- *  The dashboard is based of the Bootstrap dashboard template.
+ * This dashboard is being developed by the DVBrazil Team as a courtesy to
+ * the XLX Multiprotocol Gateway Reflector Server project.
+ * The dashboard is based of the Bootstrap dashboard template.
 */
 
 if (file_exists("./pgs/functions.php")) {
@@ -16,7 +16,6 @@ if (file_exists("./pgs/config.inc.php")) {
 } else {
     die("config.inc.php does not exist.");
 }
-
 if (!class_exists('ParseXML')) require_once("./pgs/class.parsexml.php");
 if (!class_exists('Node')) require_once("./pgs/class.node.php");
 if (!class_exists('xReflector')) require_once("./pgs/class.reflector.php");
@@ -31,8 +30,17 @@ $Reflector->SetXMLFile($Service['XMLFile']);
 
 $Reflector->LoadXML();
 
-if ($CallingHome['Active']) {
+// ==================== URFD & TCD SERVICE STATUS ====================
+function getServiceStatus($service) {
+    $output = trim(shell_exec("sudo systemctl is-active " . escapeshellarg($service) . " 2>/dev/null"));
+    return $output === 'active';
+}
 
+$urfd_active = getServiceStatus('urfd.service');
+$tcd_active  = getServiceStatus('tcd.service');
+// ================================================================
+
+if ($CallingHome['Active']) {
     $CallHomeNow = false;
     if (!file_exists($CallingHome['HashFile'])) {
         $Hash = CreateCode(16);
@@ -40,11 +48,7 @@ if ($CallingHome['Active']) {
         $Ressource = @fopen($CallingHome['HashFile'], "w");
         if ($Ressource) {
             @fwrite($Ressource, "<?php\n");
-            @fwrite($Ressource, "\n" . '$LastSync = 0;');
-            @fwrite($Ressource, "\n" . '$Hash     = "' . $Hash . '";');
-            @fwrite($Ressource, "\n\n" . '?>');
-            @fclose($Ressource);
-            @exec("chmod 777 " . $CallingHome['HashFile']);
+            @fwrite($Ressource, "\n" . '$LastSync = 0;');            @exec("chmod 777 " . $CallingHome['HashFile']);
             $CallHomeNow = true;
         }
     } else {
@@ -54,14 +58,13 @@ if ($CallingHome['Active']) {
             if ($Ressource) {
                 @fwrite($Ressource, "<?php\n");
                 @fwrite($Ressource, "\n" . '$LastSync = ' . time() . ';');
-                @fwrite($Ressource, "\n" . '$Hash     = "' . $Hash . '";');
+                @fwrite($Ressource, "\n" . '$Hash = "' . $Hash . '";');
                 @fwrite($Ressource, "\n\n" . '?>');
                 @fclose($Ressource);
             }
             $CallHomeNow = true;
         }
     }
-
     if ($CallHomeNow || isset($_GET['callhome'])) {
         $Reflector->SetCallingHome($CallingHome, $Hash);
         $Reflector->ReadInterlinkFile();
@@ -84,32 +87,48 @@ if ($CallingHome['Active']) {
     <meta name="author" content="<?php echo $PageOptions['MetaAuthor']; ?>"/>
     <meta name="revisit" content="<?php echo $PageOptions['MetaRevisit']; ?>"/>
     <meta name="robots" content="<?php echo $PageOptions['MetaAuthor']; ?>"/>
-
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <title><?php echo str_replace("XLX", "URF", $Reflector->GetReflectorName()); ?> Universal Reflector</title>
     <link rel="icon" href="./favicon.ico" type="image/vnd.microsoft.icon">
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <!-- IE10 viewport hack -->
     <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
+    <!-- Custom styles -->
     <link href="css/dashboard.css" rel="stylesheet">
+            @fwrite($Ressource, "\n" . '$Hash = "' . $Hash . '";');
+            @fwrite($Ressource, "\n\n" . '?>');
+            @fclose($Ressource);
+            
+    <style>
+        .service-led {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 2px solid #222;
+            box-shadow: 0 0 5px currentColor;
+            vertical-align: middle;
+            margin: 0 4px;
+        }
+        .led-green { background-color: #00ff00; color: #00ff00; }
+        .led-red   { background-color: #ff4444; color: #ff4444; }
+    </style>
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- HTML5 shim and Respond.js -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <?php
 
+    <?php
     if ($PageOptions['PageRefreshActive']) {
         echo '
    <script src="./js/jquery-1.12.4.min.js"></script>
    <script>
       var PageRefresh;
-
       function ReloadPage() {
          $.get("./index.php'.(isset($_GET['show'])?'?show='.$_GET['show']:'').'", function(data) {
             var BodyStart = data.indexOf("<bo"+"dy");
@@ -123,13 +142,11 @@ if ($CallingHome['Active']) {
                PageRefresh = setTimeout(ReloadPage, '.$PageOptions['PageRefreshDelay'].');
             });
       }';
-
-        if (!isset($_GET['show']) || (($_GET['show'] != 'livequadnet') && ($_GET['show'] != 'reflectors') && ($_GET['show'] != 'interlinks'))) {
+        if (!isset($_GET['show']) || (($_GET['show'] != 'livequadnet') && ($_GET['show'] != 'reflectors') && ($_GET>
             echo '
       PageRefresh = setTimeout(ReloadPage, ' . $PageOptions['PageRefreshDelay'] . ');';
         }
         echo '
-
       function SuspendPageRefresh() {
         clearTimeout(PageRefresh);
       }
@@ -139,9 +156,8 @@ if ($CallingHome['Active']) {
     ?>
 </head>
 <body>
-<?php if (file_exists("./tracking.php")) {
-    include_once("tracking.php");
-} ?>
+<?php if (file_exists("./tracking.php")) { include_once("tracking.php"); } ?>
+
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -152,14 +168,56 @@ if ($CallingHome['Active']) {
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <span class="navbar-brand"><?php echo str_replace("XLX", "URF", $Reflector->GetReflectorName()); ?> Universal Reflector</span>
+            <span class="navbar-brand">
+                <a href="http://w9winxlx.us/"><img src="./img/SIN1.jpg" alt="SIN Logo" width="70" height="40"></a>
+                Southern Indiana Network
+            </span>
         </div>
+
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li class="navbar-info">V#Q<?php echo $Reflector->GetVersion(); ?> - Dashboard
-                    v<?php echo $PageOptions['DashboardVersion']; ?></li>
-                <li class="navbar-info">Service
-                    uptime: <?php echo FormatSeconds($Reflector->GetServiceUptime()); ?></li>
+<!--                <li class="navbar-info">NA9VY Dashboard v<?php echo $PageOptions['DashboardVersion']; ?></li> ->
+                <li class="navbar-info">Days since last injury: <?php echo FormatSeconds($Reflector->GetServiceUpti>
+
+                <!-- URFD & TCD Status -->
+                <li class="navbar-info">
+                    URFD:
+                    <span class="service-led <?php echo $urfd_active ? 'led-green' : 'led-red'; ?>"></span>
+                    <strong><?php echo $urfd_active ? 'ACTIVE' : 'INACTIVE'; ?></strong>
+                </li>
+                <li class="navbar-info">
+                    TCD:
+                    <span class="service-led <?php echo $tcd_active ? 'led-green' : 'led-red'; ?>"></span>
+                    <strong><?php echo $tcd_active ? 'ACTIVE' : 'INACTIVE'; ?></strong>
+                </li>
+
+<!-- XML File Updated? -->
+
+<?php
+date_default_timezone_set('America/Indiana/Indianapolis');
+
+$xmlfile = '/var/log/xlxd.xml';
+
+if (file_exists($xmlfile)) {
+    $lastmod = filemtime($xmlfile);
+    $age_seconds = time() - $lastmod;
+    $is_stale = $age_seconds > 180;        // ← change to 30 if you want it stricter
+
+    $led_class = $is_stale ? 'service-led led-red' : 'service-led led-green';
+    $status_text = $is_stale ? 'STALE' : 'UPDATED';
+    $time_str = date('H:i:s', $lastmod);
+    
+    echo '<li class="navbar-info">XML:
+          <span class="' . $led_class . '"></span>
+          <strong>' . $status_text . '</strong>
+          <span style="color: ' . ($is_stale ? '#ff4444' : '#44ff88') . '; font-size: 0.85em;">
+              (' . $time_str . ')
+          </span>
+          </li>';
+                } else {
+                    echo '<li class="navbar-info" style="color:#ff8888;">⚠️ xlxd.xml not found</li>';
+                }
+                ?>
             </ul>
         </div>
     </div>
@@ -169,84 +227,71 @@ if ($CallingHome['Active']) {
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li<?php echo (($_GET['show'] == "users") || ($_GET['show'] == "")) ? ' class="active"' : ''; ?>><a
-                            href="./index.php">Last Heard</a></li>
-                <li<?php echo ($_GET['show'] == "repeaters") ? ' class="active"' : ''; ?>><a
-                            href="./index.php?show=repeaters">Connected Devices (<?php echo $Reflector->NodeCount(); ?>)
-                        </a></li>
-                <li<?php echo ($_GET['show'] == "peers") ? ' class="active"' : ''; ?>><a href="./index.php?show=peers">Interlinks
-                        (<?php echo $Reflector->PeerCount(); ?>)</a></li>
-                <li<?php echo ($_GET['show'] == "modules") ? ' class="active"' : ''; ?>><a
-                            href="./index.php?show=modules">Modules List</a></li>
-                <p>&nbsp&nbsp&nbsp&nbsp&nbsp-----------------------<br>
-                &nbsp&nbsp&nbsp&nbsp&nbspBrandMeister Links<br>&nbsp&nbsp&nbsp&nbsp&nbspfor SIN</p>
-                <li<?php echo ($_GET['show'] == "lastheardsin") ? ' class="active"' : ''; ?>><a
-                            href="https://brandmeister.network/?page=lh&DestinationID=31188" target=blan>Last Heard<br>on BM SIN</a></li>
-                <li<?php echo ($_GET['show'] == "devicessin") ? ' class="active"' : ''; ?>><a
-                            href="https://brandmeister.network/?page=talkgroup&id=31188" target=blan>Devices connected<br>to BM SIN</a></li>
-                <p>&nbsp&nbsp&nbsp&nbsp&nbsp-----------------------<br>
-                &nbsp&nbsp&nbsp&nbsp&nbspLinks to other stuff</p>
-                <li<?php echo ($_GET['show'] == "reflectors") ? ' class="active"' : ''; ?>><a
-                            href="https://dvref.com/" target=blan>Digital Voice Reflectors</a></li>
-                <li<?php echo ($_GET['show'] == "livequadnet") ? ' class="active"' : ''; ?>><a
-                            href="./index.php?show=livequadnet">D-Star Activity Live</a></li>
+                <li<?php echo (($_GET['show'] == "users") || ($_GET['show'] == "")) ? ' class="active"' : ''; ?>><a>
+                <li<?php echo ($_GET['show'] == "repeaters") ? ' class="active"' : ''; ?>><a href="./index.php?show>
+                <li<?php echo ($_GET['show'] == "peers") ? ' class="active"' : ''; ?>><a href="./index.php?show=pee>
+                <li<?php echo ($_GET['show'] == "modules") ? ' class="active"' : ''; ?>><a href="./index.php?show=m>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-----------------------<br>
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RPi & Network Stats<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for SIN</p>
+                <li<?php echo ($_GET['show'] == "pidashboard") ? ' class="active"' : ''; ?>><a href="https://<?php >
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-----------------------<br>
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BrandMeister Links<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for SIN</p>
+                <li<?php echo ($_GET['show'] == "lastheardsin") ? ' class="active"' : ''; ?>><a href="https://brand>
+                <li<?php echo ($_GET['show'] == "devicessin") ? ' class="active"' : ''; ?>><a href="https://brandme>
+
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-----------------------<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Links to >
+                <li<?php echo ($_GET['show'] == "reflectors") ? ' class="active"' : ''; ?>><a href="https://dvref.c>
+                <li<?php echo ($_GET['show'] == "livequadnet") ? ' class="active"' : ''; ?>><a href="./index.php?sh>
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-
             <?php
             if ($CallingHome['Active']) {
                 if (!is_readable($CallingHome['HashFile']) && (!is_writeable($CallingHome['HashFile']))) {
                     echo '
          <div class="error">
-            your private hash in ' . $CallingHome['HashFile'] . ' could not be created, please check your config file and the permissions for the defined folder.
+            your private hash in ' . $CallingHome['HashFile'] . ' could not be created, please check your config fi>
          </div>';
                 }
             }
-
             switch ($_GET['show']) {
-                case 'users'      :
+                case 'users' :
                     require_once("./pgs/users.php");
                     break;
-                case 'repeaters'  :
+                case 'repeaters' :
                     require_once("./pgs/repeaters.php");
                     break;
-                case 'modules'  :
+                case 'modules' :
                     require_once("./pgs/modules.php");
                     break;
                 case 'livequadnet' :
                     require_once("./pgs/livequadnet.php");
                     break;
-                case 'peers'      :
+                case 'peers' :
                     require_once("./pgs/peers.php");
                     break;
                 case 'reflectors' :
                     require_once("./pgs/reflectors.php");
                     break;
-                default           :
+                default :
                     require_once("./pgs/users.php");
             }
-
             ?>
-
         </div>
     </div>
 </div>
 
 <footer class="footer">
     <div class="container">
-        <p><a href="mailto:<?php echo $PageOptions['ContactEmail']; ?>"><?php echo $PageOptions['ContactEmail']; ?></a>
-        </p>
+        <p><a href="mailto:<?php echo $PageOptions['ContactEmail']; ?>"><?php echo $PageOptions['ContactEmail']; ?>>
     </div>
 </footer>
 
-<!-- Bootstrap core JavaScript
- ================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
+<!-- Bootstrap core JavaScript -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+<script src="js/jquery-1.12.4.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="js/ie10-viewport-bug-workaround.js"></script>
 </body>
-</html>
+</html>                
