@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <?php
 /*
- * This dashboard is being developed by the DVBrazil Team as a courtesy to
+ * The original dashboard was developed by the DVBrazil Team as a courtesy to
  * the XLX Multiprotocol Gateway Reflector Server project.
+ * NA9VY has modified it for his own needs.
  * The dashboard is based of the Bootstrap dashboard template.
 */
 
