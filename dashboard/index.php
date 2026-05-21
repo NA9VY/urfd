@@ -76,7 +76,6 @@ if ($CallingHome['Active']) {
     $Hash = "";
 }
 ?>
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -96,12 +95,7 @@ if ($CallingHome['Active']) {
     <!-- IE10 viewport hack -->
     <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
-    <!-- Custom styles -->
-    <link href="css/dashboard.css" rel="stylesheet">
-            @fwrite($Ressource, "\n" . '$Hash = "' . $Hash . '";');
-            @fwrite($Ressource, "\n\n" . '?>');
-            @fclose($Ressource);
-            
+    <!-- Custom styles -->            
     <style>
         .service-led {
             display: inline-block;
@@ -226,23 +220,57 @@ if (file_exists($xmlfile)) {
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
-            <ul class="nav nav-sidebar">
-                <li<?php echo (($_GET['show'] == "users") || ($_GET['show'] == "")) ? ' class="active"' : ''; ?>><a>
-                <li<?php echo ($_GET['show'] == "repeaters") ? ' class="active"' : ''; ?>><a href="./index.php?show>
-                <li<?php echo ($_GET['show'] == "peers") ? ' class="active"' : ''; ?>><a href="./index.php?show=pee>
-                <li<?php echo ($_GET['show'] == "modules") ? ' class="active"' : ''; ?>><a href="./index.php?show=m>
-                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-----------------------<br>
-                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RPi & Network Stats<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for SIN</p>
-                <li<?php echo ($_GET['show'] == "pidashboard") ? ' class="active"' : ''; ?>><a href="https://<?php >
-                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-----------------------<br>
-                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BrandMeister Links<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for SIN</p>
-                <li<?php echo ($_GET['show'] == "lastheardsin") ? ' class="active"' : ''; ?>><a href="https://brand>
-                <li<?php echo ($_GET['show'] == "devicessin") ? ' class="active"' : ''; ?>><a href="https://brandme>
+<!-- Navigation Menu -->
+<ul class="nav nav-sidebar">
 
-                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-----------------------<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Links to >
-                <li<?php echo ($_GET['show'] == "reflectors") ? ' class="active"' : ''; ?>><a href="https://dvref.c>
-                <li<?php echo ($_GET['show'] == "livequadnet") ? ' class="active"' : ''; ?>><a href="./index.php?sh>
-            </ul>
+    <li<?php echo (($_GET['show'] == "users") || ($_GET['show'] == "")) ? ' class="active"' : ''; ?>>
+        <a href="./index.php">Dashboard</a>
+    </li>
+
+    <li<?php echo ($_GET['show'] == "repeaters") ? ' class="active"' : ''; ?>>
+        <a href="./index.php?show=repeaters">Repeaters</a>
+    </li>
+
+    <li<?php echo ($_GET['show'] == "peers") ? ' class="active"' : ''; ?>>
+        <a href="./index.php?show=peers">Peers</a>
+    </li>
+
+    <li<?php echo ($_GET['show'] == "modules") ? ' class="active"' : ''; ?>>
+        <a href="./index.php?show=modules">Modules</a>
+    </li>
+
+    <p class="nav-header">&nbsp;-----------------------<br>
+       &nbsp;RPi & Network Stats<br>
+       &nbsp;for SIN</p>
+
+    <li<?php echo ($_GET['show'] == "pidashboard") ? ' class="active"' : ''; ?>>
+        <a href="https://<?php echo $_SERVER['HTTP_HOST']; ?>/pi" target="_blank">Pi Dashboard</a>
+    </li>
+
+    <p class="nav-header">&nbsp;-----------------------<br>
+       &nbsp;BrandMeister Links<br>
+       &nbsp;for SIN</p>
+
+    <li<?php echo ($_GET['show'] == "lastheardsin") ? ' class="active"' : ''; ?>>
+        <a href="https://brandmeister.network/?show=lastheard&callsign=NA9VY" target="_blank">Last Heard on BM SIN</a>
+    </li>
+
+    <li<?php echo ($_GET['show'] == "devicessin") ? ' class="active"' : ''; ?>>
+        <a href="https://brandmeister.network/?show=devices&callsign=NA9VY" target="_blank">Devices connected to BM SIN</a>
+    </li>
+
+    <p class="nav-header">&nbsp;-----------------------<br>
+       &nbsp;Links to other stuff</p>
+
+    <li<?php echo ($_GET['show'] == "reflectors") ? ' class="active"' : ''; ?>>
+        <a href="https://dvref.com/" target="_blank">Digital Voice Reflectors</a>
+    </li>
+
+    <li<?php echo ($_GET['show'] == "livequadnet") ? ' class="active"' : ''; ?>>
+        <a href="./index.php?show=livequadnet">D-Star Activity Live</a>
+    </li>
+
+</ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <?php
